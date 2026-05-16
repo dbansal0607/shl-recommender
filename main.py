@@ -8,7 +8,7 @@ FastAPI application.
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, validator
 from typing import Literal
 from dotenv import load_dotenv
 
@@ -51,7 +51,6 @@ class Message(BaseModel):
     content: str
 
     @field_validator("content")
-    @classmethod
     def content_not_empty(cls, v: str) -> str:
         v = v.strip()
         if not v:
@@ -63,7 +62,6 @@ class ChatRequest(BaseModel):
     messages: list[Message]
 
     @field_validator("messages")
-    @classmethod
     def validate_messages(cls, v: list[Message]) -> list[Message]:
         if not v:
             raise ValueError("messages list cannot be empty")
