@@ -50,7 +50,7 @@ class Message(BaseModel):
     role:    Literal["user", "assistant"]
     content: str
 
-    @field_validator("content")
+    @validator("content")
     def content_not_empty(cls, v: str) -> str:
         v = v.strip()
         if not v:
@@ -61,8 +61,8 @@ class Message(BaseModel):
 class ChatRequest(BaseModel):
     messages: list[Message]
 
-    @field_validator("messages")
-    def validate_messages(cls, v: list[Message]) -> list[Message]:
+    @validator("messages")
+    def validate_messages(cls, v):
         if not v:
             raise ValueError("messages list cannot be empty")
         if len(v) > 20:
