@@ -83,7 +83,7 @@ def _tokenize(text: str) -> list[str]:
 
 class CatalogSearch:
     def __init__(self):
-        self.model = SentenceTransformer(MODEL_NAME)
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
 
         # Load and normalise
         print("Loading catalog from:", CATALOG_FILE)
