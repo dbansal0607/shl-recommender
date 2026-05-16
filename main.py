@@ -36,6 +36,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+@app.get("/")
+def home():
+    return {"message": "SHL Recommender API is running successfully"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
