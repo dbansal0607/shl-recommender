@@ -37,8 +37,8 @@ app = FastAPI(
 )
 
 @app.get("/")
-def home():
-    return {"message": "SHL Recommender API is running successfully"}
+async def root():
+    return {"status": "working"}
 
 app.add_middleware(
     CORSMiddleware,
